@@ -105,6 +105,8 @@ La herencia ocurre para consultar propiedades, solo de lectura
 
 Chain operator
 
+![herencia](img/herencia.PNG)
+
 # JSON.stringfy
 
 JSON.stringfy({x: 1}): te convierte un objeto en string
@@ -133,18 +135,18 @@ const LibraryBuilder = () => {(
 
 # CLASES
 
+![clases](img/creacion_de_clases.PNG)
+
 Miembros o estancias de una clase guardarán un estado interno y unas propiedades comunes.
 
-Herencia basada en prototipos, y las clases no existen, solo son azúcar sintáctico para decir lo otro.
+Herencia basada en prototipos, y las clases no existen, solo son azúcar sintáctico para decir herencia basada en prototipos.
 
-class CarritoCompra {
+    class CarritoCompra {}
 
-}
+    const carritocompra = new CarritoCompra;
 
-const carritocompra = new CarritoCompra;
-
-`function Range { }let r = new Range(1,3);`
-
+```js
+function Range { }let r = new Range(1,3);
 class Range {
 constructor(from, to) {
 this.from = from;
@@ -156,13 +158,18 @@ this.to = to;
     }
 
 }
+```
 
-static es una propiedad de la clase que no hace falta incializar con el New, podemos acceder con ., y son propiedades que están cerradas con los mismos valores.
+## **Static**
+
+Es una propiedad de la clase que no hace falta incializar con el New, podemos acceder con ., y son propiedades que están cerradas con los mismos valores.
+
+![clases](img/static.PNG)
 
 Constructor
 
 get y set, nos permite con la propiedad con \_ delante, encapsular
 
-### HERENCIA
+## HERENCIA
 
 REGLA: SOLO DOS NIVELES DE HERENCIA COMO MÁXIMO, NO ABUSAR DE ELLO.
