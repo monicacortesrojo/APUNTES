@@ -186,6 +186,8 @@ TE BUSCA UN ELEMENTO Y TE LO DEVULVE, EL PRIMERO QUE CUMPLA LA CONDICIÓN
 
 ## **REDUCE**
 
+Ver enlace https://www.freecodecamp.org/news/reduce-f47a7da511a9/
+
 Metodo funcional del array, recorre el array y sus elementos y genera un único valor
 
 El 0 final es el acumulador incial, y el next es el 1, los suma, despues el acc es 1 y next 2 y los suma, y así va sumando todo.<br><br>
@@ -194,3 +196,5 @@ El 0 final es el acumulador incial, y el next es el 1, los suma, despues el acc 
 <br>
 
 ![Arrays_reduce](img/reduce_pokemons.PNG)
+
+

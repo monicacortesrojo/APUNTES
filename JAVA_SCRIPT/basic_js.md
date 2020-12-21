@@ -811,3 +811,143 @@ console.log([p]);
 ## THE SINGLE RESPONSIBILITY PRINCIPE
 
 Las funciones deben ser reducidas, máximo de 20 líneas y mínimo no hay, siempre el menos nº de lineas, y las funciones solo deben hacer una cosa, hay que hacer muchas funciones pequeñas, porque asi es mas facil de testear
+
+# ASINCRONIA
+
+![recursividad](img/asincronia.PNG)
+
+## PARALELISMO
+
+img 2-4
+
+Cuando dos tareas ocurren de manera paralela, se ejecutan en el mismo momento.
+
+## CONCURRENCIA
+
+img 1-3
+
+Dos o más tareas ocurren de manera simultánea, una detrás de otra.
+
+## TAREAS
+
+La naturaleza de las tareas, estás para ejecutarse consumen de nuestra cpu, operaciones limitadas por la cpu, hay otras que no se ejecutan aquí, como acceder a un archivo y leerlo, operaciones de entrada y salida, acceder al disco duro por ejemplo
+
+<br>
+
+SÍNCRONO, yo ejecuto está tarea y cuando esta acabe ejecuta la otra
+![recursividad](img/tareas.PNG)
+
+## EVENTOS JAVA SCRIPT
+
+tiene un único hilo, no bloqueante, y mete todas las tareas en un loop de eventos, es un for eterno que va ejecutando los eventos
+![recursividad](img/eventos_js.PNG)
+
+Patrones en la asincronia
+
+CALLBACK: son la pieza clave para que js funcione de forma asíncrona, es una función que pasa como arguemento de otra función. es invocada para completar una acción. Significa que quieres hacer después de que la operación asíncrona se haya ejecutado.
+Un callback se añade a la cola de eventos y se ejecuta después. En el ejemplo el call back es setTimeout
+
+![recursividad](img/call_back.PNG)
+
+Esto suele generar una píramide del miedo que no se puede manejar.
+
+![recursividad](img/piramide_miedo.PNG)
+
+Después de esto llegaron las promesas en js.
+
+## **PROMESAS**
+
+Representa el resultado de una determinada acción debajo de esto hay un callback. Las promesas tienen la prioridad en el event loop.
+La promesa acepta una function.
+
+### **¿Cómo realizamos una promesa?**
+
+![recursividad](img/promesa.PNG)
+
+Aquí le pasamos a nuestra función un resolve que sería nuestra promesa resuelta si se cumple la condición, si no pasamos al reject, rechazamos nuestra promesa.
+
+El then es lo que pasa una vez se ejecute, si va solo se ejcute tanto si se ha resuelto como si se ha rechazo, pero si ponemos el catch este va para cuando es rechazada y el then cuando es resuelta.
+
+Una vez que el resolve se ha ejecutado se finaliza la promesa y no se puede volver a reiniciar.
+
+## ENCADENAR PROMESAS
+
+cadena de promesas
+
+```js
+function task1() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("resultado de la task1");
+    }, 5000);
+  });
+}
+function task2() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("resultado de la task2");
+    }, 1000);
+  });
+}
+const promise = task1();
+promise
+  .then((data1) => {
+    console.log("data1", data1);
+    return task2();
+  })
+  .then((data2) => {
+    console.log("data2", data2);
+    return "Hola Promesas";
+  })
+  .then((data3) => {
+    console.log("data3", data3);
+  });
+```
+
+Los return van haciendo que se cumpla la promesa siguiente, garantizan un orden, si no se ejecuta la primera no se va a ejecutar la segunda, están concadenadas.
+
+![recursividad](img/promise_mal.PNG)
+
+testPromise está mal, pero a veces podemos querer meter ahí una tarea que consuma mucho para que no realentice
+
+testPromiseGood está bien.
+
+![recursividad](img/promise_mal2.PNG)
+
+Doom mal, notDoom bien
+
+![recursividad](img/autoresolver.PNG)
+
+.resolve hace que se autoresuelva.
+
+Siempre que una función pueda devolver una promesa lo tiene que hacer. Si en el último return no pusiéramos promise jamás se ejecutaría el "foo"
+
+## .CATCH
+
+Es un alias del error del then. Es para no pasarle al then 2 cosas
+
+![recursividad](img/catch.PNG)
+
+Es lo mismo el then null que el catch pero más simple.
+<br><br><br>
+
+![recursividad](img/catch3.PNG)
+
+El catch es llamado sobre then, si then no es rechazado no vamos a llegar al catch .
+<br><br><br><br>
+
+![recursividad](img/catch2.PNG)
+<br><br>
+
+![recursividad](img/success_error.PNG)
+Resolución: Success/Error/Error Caught
+
+<br><br>
+
+### EJERCICIO CON POKEAPI
+
+  <br>
+
+![recursividad](img/promesas_pokemons.PNG)
+
+fetch: hace una request a esa URL, y se ejecutan las promesas, entonces nos devuelve los objetos en el .json que hay en esa url, asi obtenemos el data, y ya de ahi lo pintamos en el dom, mapeándolo.
